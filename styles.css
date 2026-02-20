@@ -61,6 +61,11 @@ a {
     /* Tighten line height */
 }
 
+.mobile-nav-controls {
+    display: none;
+}
+
+
 .nav-links {
     display: flex;
     gap: 20px;
@@ -619,9 +624,40 @@ a {
         display: none;
     }
 
-    /* Simplified for mobile, ideally would be hamburger */
+    .mobile-nav-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .mobile-nav-select {
+        background: var(--bg-card);
+        color: var(--text-white);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.85rem;
+        padding: 8px 10px;
+        min-width: 120px;
+    }
+
+    .mobile-nav-select:focus {
+        outline: 2px solid var(--primary);
+        outline-offset: 1px;
+    }
+
+    .mobile-talk-btn {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+
     .hero h1 {
         font-size: 2.5rem;
+    }
+
+    .hero h2 {
+        font-size: 1.5rem;
+        line-height: 1.35;
     }
 
     .footer-links {

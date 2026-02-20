@@ -27,6 +27,15 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">JM.</div>
+        <div class="mobile-nav-controls" aria-label="Mobile quick navigation">
+            <select class="mobile-nav-select" id="mobile-section-nav" aria-label="Jump to section">
+                <option value="">Menu</option>
+                <option value="#expertise">Expertise</option>
+                <option value="#experience">Experience</option>
+                <option value="#education">Education</option>
+            </select>
+            <a href="#contact" class="btn-primary mobile-talk-btn">Let's Talk</a>
+        </div>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#expertise">Expertise</a></li>
@@ -288,6 +297,17 @@
         el.classList.add('hidden-scroll');
         observer.observe(el);
     });
+
+    const mobileSectionNav = document.getElementById('mobile-section-nav');
+    if (mobileSectionNav) {
+        mobileSectionNav.addEventListener('change', (event) => {
+            const selectedTarget = event.target.value;
+            if (selectedTarget) {
+                window.location.hash = selectedTarget;
+                event.target.value = '';
+            }
+        });
+    }
 </script>
 
 </html>
