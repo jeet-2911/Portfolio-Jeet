@@ -61,10 +61,10 @@ a {
     /* Tighten line height */
 }
 
-.mobile-nav-controls {
+.mobile-menu-wrap {
     display: none;
+    position: relative;
 }
-
 
 .nav-links {
     display: flex;
@@ -624,31 +624,63 @@ a {
         display: none;
     }
 
-    .mobile-nav-controls {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+    .mobile-menu-wrap {
+        display: block;
     }
 
-    .mobile-nav-select {
-        background: var(--bg-card);
-        color: var(--text-white);
+    .mobile-menu-toggle {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
         border: 1px solid var(--border);
-        border-radius: 8px;
-        font-size: 0.85rem;
-        padding: 8px 10px;
-        min-width: 120px;
+        background: var(--bg-card);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        padding: 10px;
+        cursor: pointer;
     }
 
-    .mobile-nav-select:focus {
-        outline: 2px solid var(--primary);
-        outline-offset: 1px;
+    .mobile-menu-toggle span {
+        display: block;
+        height: 2px;
+        width: 100%;
+        background: var(--text-white);
+        border-radius: 999px;
     }
 
-    .mobile-talk-btn {
-        padding: 8px 14px;
-        font-size: 0.8rem;
-        white-space: nowrap;
+    .mobile-dropdown {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 8px);
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        min-width: 170px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        display: none;
+        z-index: 1001;
+    }
+
+    .mobile-dropdown.open {
+        display: block;
+    }
+
+    .mobile-dropdown a {
+        display: block;
+        padding: 10px 14px;
+        color: var(--text-white);
+        font-size: 0.95rem;
+    }
+
+    .mobile-dropdown a+a {
+        border-top: 1px solid var(--border);
+    }
+
+    .mobile-dropdown a:hover {
+        background: #243247;
     }
 
     .hero h1 {
@@ -656,8 +688,8 @@ a {
     }
 
     .hero h2 {
-        font-size: 1.5rem;
-        line-height: 1.35;
+        font-size: 1.2rem;
+        line-height: 1.4;
     }
 
     .footer-links {

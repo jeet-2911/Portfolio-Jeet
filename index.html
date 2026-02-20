@@ -27,14 +27,19 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">JM.</div>
-        <div class="mobile-nav-controls" aria-label="Mobile quick navigation">
-            <select class="mobile-nav-select" id="mobile-section-nav" aria-label="Jump to section">
-                <option value="">Menu</option>
-                <option value="#expertise">Expertise</option>
-                <option value="#experience">Experience</option>
-                <option value="#education">Education</option>
-            </select>
-            <a href="#contact" class="btn-primary mobile-talk-btn">Let's Talk</a>
+        <div class="mobile-menu-wrap">
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Open mobile navigation"
+                aria-expanded="false" aria-controls="mobile-dropdown-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="mobile-dropdown" id="mobile-dropdown-menu">
+                <a href="#about">About</a>
+                <a href="#expertise">Expertise</a>
+                <a href="#experience">Experience</a>
+                <a href="#education">Education</a>
+            </div>
         </div>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
@@ -298,13 +303,29 @@
         observer.observe(el);
     });
 
-    const mobileSectionNav = document.getElementById('mobile-section-nav');
-    if (mobileSectionNav) {
-        mobileSectionNav.addEventListener('change', (event) => {
-            const selectedTarget = event.target.value;
-            if (selectedTarget) {
-                window.location.hash = selectedTarget;
-                event.target.value = '';
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileDropdownMenu = document.getElementById('mobile-dropdown-menu');
+
+    if (mobileMenuToggle && mobileDropdownMenu) {
+        mobileMenuToggle.addEventListener('click', () => {
+            const isOpen = mobileDropdownMenu.classList.toggle('open');
+            mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        mobileDropdownMenu.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                mobileDropdownMenu.classList.remove('open');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            const clickedInsideMenu = mobileDropdownMenu.contains(event.target);
+            const clickedToggle = mobileMenuToggle.contains(event.target);
+
+            if (!clickedInsideMenu && !clickedToggle) {
+                mobileDropdownMenu.classList.remove('open');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
             }
         });
     }
