@@ -59,7 +59,7 @@
             <h2 class="slide-up">Digital Marketing Professional <br> & Strategist</h2>
             <div class="cta-group slide-up-delay">
                 <a href="#projects" class="btn-primary">View My Work</a>
-                <a href="mailto:majithiyajeet1245@gmail.com" class="btn-secondary">Contact Me</a>
+                <a href="mailto:majithiyajeet1245@gmail.com" class="btn-secondary" id="hero-contact-btn">Contact Me</a>
             </div>
         </div>
         <div class="hero-visual">
@@ -304,6 +304,7 @@
         observer.observe(el);
     });
 
+
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileDropdownMenu = document.getElementById('mobile-dropdown-menu');
 
@@ -314,7 +315,12 @@
         });
 
         mobileDropdownMenu.querySelectorAll('a').forEach((link) => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', (event) => {
+                if (link.getAttribute('href') === '#home' && window.matchMedia('(max-width: 600px)').matches) {
+                    event.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+
                 mobileDropdownMenu.classList.remove('open');
                 mobileMenuToggle.setAttribute('aria-expanded', 'false');
             });
@@ -327,6 +333,20 @@
             if (!clickedInsideMenu && !clickedToggle) {
                 mobileDropdownMenu.classList.remove('open');
                 mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    const heroContactButton = document.getElementById('hero-contact-btn');
+
+    if (heroContactButton) {
+        heroContactButton.addEventListener('click', (event) => {
+            if (window.matchMedia('(max-width: 600px)').matches) {
+                event.preventDefault();
+                const footerSection = document.getElementById('contact');
+                if (footerSection) {
+                    footerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
         });
     }
