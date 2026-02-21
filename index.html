@@ -291,7 +291,20 @@
 </body>
 <!-- Simple Script for Scroll Animations -->
 <script>
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
+    const navEntry = performance.getEntriesByType('navigation')[0];
+    if (navEntry && navEntry.type === 'reload') {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+        window.addEventListener('load', () => {
+            window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        });
+    }
+
     const observer = new IntersectionObserver((entries) => {
+
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
@@ -303,7 +316,6 @@
         el.classList.add('hidden-scroll');
         observer.observe(el);
     });
-
 
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileDropdownMenu = document.getElementById('mobile-dropdown-menu');
